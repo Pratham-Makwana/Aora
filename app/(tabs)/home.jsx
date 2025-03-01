@@ -12,22 +12,27 @@ import { images } from "../../constants";
 import SearchInput from "../../components/SearchInput";
 import Trending from "../../components/Trending";
 import EmptyState from "../../components/EmptyState";
-import { getAllPosts } from "../../lib/appwrite";
+import { getAllPosts, getLatestPosts } from "../../lib/appwrite";
 import useAppwrite from "../../lib/useAppwrite";
 import VideoCard from "../../components/VideoCard";
+import { useGlobalContext } from "../../context/GlobalProvider";
 
 const Home = () => {
-  const {data : posts, refetch} = useAppwrite(getAllPosts)
+  const { user, setUser, setIsLoggedIn } = useGlobalContext();
+  const { data: posts, refetch } = useAppwrite(getAllPosts);
+  const { data: latestPosts } = useAppwrite(getLatestPosts);
+  // console.log("==> latest", posts[0]);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
     // re call videos -> if any new videos  appreard
-    await refetch()
+    await refetch();
     setRefreshing(false);
   };
   // console.log(posts);
-  
+
   return (
     <SafeAreaView className="bg-primary  h-full">
       <FlatList
@@ -36,19 +41,17 @@ const Home = () => {
         data={posts}
         // keyExtractor={(item) => item.id}
         keyExtractor={(item) => item.$id} // from appwrite
-        renderItem={({ item }) => (
-         <VideoCard video={item}/>
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className=" my-6 px-4  gap-y-6">
             {/* Header Bar Row  */}
             <View className="justify-between items-start flex-row mb-6">
               <View>
                 <Text className="font-pmedium text-sm text-gray-100">
-                  Welcome Back
+                  Welcome back,
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  Pratham
+                  {user?.username}
                 </Text>
               </View>
               <View className="mt-1.5">
@@ -66,7 +69,7 @@ const Home = () => {
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 Latest Video
               </Text>
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={latestPosts ?? []} />
             </View>
           </View>
         )}

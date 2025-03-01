@@ -25,15 +25,15 @@ const SignUp = () => {
     try {
       const result = await createUser(form.email, form.password, form.username);
       console.log("==> SignUp result", result);
+      //  set it to global state like context or reduce slice
       setUser(result);
       setIsLoggedIn(true);
 
-      //  set it to global state like context or reduce slice
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 
@@ -83,7 +83,7 @@ const SignUp = () => {
               href="/sign-in"
               className="text-lg text-secondary font-semibold"
             >
-              Sign Up
+              Sign In
             </Link>
           </View>
         </View>

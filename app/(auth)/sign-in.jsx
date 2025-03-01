@@ -5,7 +5,7 @@ import { images } from "../../constants";
 import FormField from "../../components/FormField";
 import CustomButton from "../../components/CustomButton";
 import { Link, router } from "expo-router";
-import { signIn } from "../../lib/appwrite";
+import { getCurrentUser, signIn } from "../../lib/appwrite";
 import { useGlobalContext } from "../../context/GlobalProvider";
 
 const SignIn = () => {
@@ -22,18 +22,21 @@ const SignIn = () => {
     }
     setSubmitting(true);
     try {
-      const result = await signIn(form.email, form.password);
-      console.log(" Sign In result", result);
+      await signIn(form.email, form.password);
       //  set it to global state like context or reduce slice
+      const result = await getCurrentUser();
+      console.log(" Sign In result", result);
       setUser(result);
       setIsLoggedIn(true);
+
       Alert.alert("Success", "User signed in successfully");
+      router.replace("/home");
 
       router.replace("/home");
     } catch (error) {
       Alert.alert("Error", error.message);
     } finally {
-      setIsSubmitting(false);
+      setSubmitting(false);
     }
   };
 
