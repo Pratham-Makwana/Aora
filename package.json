@@ -9,9 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "expo": "~52.0.37",
+    "dotenv": "^16.4.7",
     "expo-av": "^15.0.2",
     "expo-constants": "~17.0.7",
+    "expo-document-picker": "^13.0.3",
     "expo-font": "~13.0.4",
     "expo-linking": "~7.0.5",
     "expo-router": "~4.0.17",

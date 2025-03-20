@@ -19,9 +19,6 @@ const FormField = ({
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
- 
-
- 
 
   return (
     <View className={`gap-y-2 ${otherStyles}`}>

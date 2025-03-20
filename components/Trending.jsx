@@ -50,8 +50,8 @@ const TrendingItem = ({ activeItem, item }) => {
     >
       {play ? (
         <Video
-          source={localvideo}
-          // source={{uri : item.video}}
+          // source={localvideo}
+          source={{uri : item.video}}
           style={[styles.video]}
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls

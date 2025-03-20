@@ -11,6 +11,7 @@ import VideoCard from "../../components/VideoCard";
 const Search = () => {
   const { data: posts, refetch } = useAppwrite(() => searchPosts(query));
   const { query } = useLocalSearchParams();
+  
   useEffect(() => {
     refetch();
   }, [query]);

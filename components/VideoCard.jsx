@@ -47,8 +47,8 @@ const VideoCard = ({
       {play ? (
         // <Text className="text-white">Play</Text>
         <Video
-          source={localvideo}
-          // source={{uri :video}}
+          // source={localvideo}
+          source={{uri :video}}
           
           style={[styles.video]}
           resizeMode={ResizeMode.CONTAIN}

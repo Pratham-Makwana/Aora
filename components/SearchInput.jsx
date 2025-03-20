@@ -13,7 +13,7 @@ import { router, usePathname } from "expo-router";
 
 const SearchInput = ({ initialQuery }) => {
   const pathname = usePathname();
-  const [query, setQuery] = useState( initialQuery ||"");
+  const [query, setQuery] = useState(initialQuery || "");
 
   return (
     <View
@@ -27,7 +27,6 @@ const SearchInput = ({ initialQuery }) => {
         placeholderTextColor="#CDCDE0"
         onChangeText={(e) => setQuery(e)}
         autoCapitalize="none"
-       
       />
 
       <TouchableOpacity
